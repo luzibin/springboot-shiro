@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weepal.flow.common.dao.WpSysUserDao" >
+  <resultMap id="BaseResultMap" type="com.weepal.flow.common.entity.WpSysUser" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="UserID" property="userId" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="BDate" property="bdate" jdbcType="TIMESTAMP" />
+    <result column="EDate" property="edate" jdbcType="TIMESTAMP" />
+    <result column="isActive" property="isActive" jdbcType="BIT" />
+    <result column="guid" property="guid" jdbcType="VARCHAR" />
+    <result column="add_date" property="addDate" jdbcType="TIMESTAMP" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="time_stamp" property="timeStamp" jdbcType="BINARY" />
+  </resultMap>
+
+  <sql id="baseCols">
+    UserID as userId,
+    role_id as roleId,
+    BDate as bdate,
+    EDate as edate,
+    isActive as isActive,
+    guid as guid,
+    add_date as addDate,
+    name as name,
+    email as email,
+    password as password,
+    account as account,
+    mobile as mobile,
+    time_stamp as timeStamp
+  </sql>
+
+  <select id="selectUserInfo" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT
+    <include refid="baseCols"/>
+--     FROM gpallas.dbo.wp_sys_user
+    FROM wp_sys_user
+    WHERE isActive = 1
+    and  account = #{account,jdbcType=VARCHAR}    </select>
+</mapper>
